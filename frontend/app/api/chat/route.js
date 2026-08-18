@@ -29,7 +29,7 @@ export async function POST(req) {
     const userMessage = messages[messages.length - 1].content;
 
     const result = await streamText({
-      model: groq("llama-3.3-70b-versatile"),
+      model: groq("openai/gpt-oss-120b"),
       system: SYSTEM_PROMPT,
       messages,
       onFinish: async ({ text }) => {
@@ -43,7 +43,7 @@ export async function POST(req) {
 
     return result.toDataStreamResponse();
   } catch (err) {
-    console.error("❌ Chat API Error:", err?.message || err);
+    console.error(" Chat API Error:", err?.message || err);
     return Response.json({ error: err?.message || "Unknown error" }, { status: 500 });
   }
 }
